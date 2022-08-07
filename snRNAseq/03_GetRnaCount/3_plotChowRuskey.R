@@ -1,0 +1,26 @@
+
+library(RColorBrewer)
+library(Vennerable)
+
+
+dir.create('Plots')
+
+
+#======================================== Chow-Ruskey Plot
+data1=read.table('Plots/VennInput.txt', header=T)
+
+### a,b,c,d,e
+## 00000 10000 01000 11000 00100 10100 01100 11100 00010 10010 01010 11010 00110 
+## 10110 01110 11110 00001 10001 01001 11001 00101 10101 01101 11101 00011 10011 
+## 01011 11011 00111 10111 01111 11111 
+
+vennData <- Venn(SetNames = c('DopaN','Oligo','Ast','Micro','Endo'), Weight = c(data1$nVal))
+
+pdf('Plots/CellTypePeak.ChowRusky.pdf')
+plot(vennData, doWeights = TRUE, type = "ChowRuskey",)
+dev.off()
+
+
+
+
+
